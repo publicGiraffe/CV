@@ -144,6 +144,9 @@
   <data name="Home Page" xml:space="preserve">
     <value>Welcome!</value>
   </data>
+  <data name="Kalush" xml:space="preserve">
+    <value>Kalush</value>
+  </data>
   <data name="Kharkiv" xml:space="preserve">
     <value>Kharkiv</value>
   </data>
