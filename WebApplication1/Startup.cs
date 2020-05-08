@@ -29,7 +29,10 @@ namespace WebApplication1
         {
             services.AddControllersWithViews();
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
-
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);//You can set Time   
+            });
             services.AddMvc()
                 .AddViewLocalization(
                     LanguageViewLocationExpanderFormat.Suffix,
@@ -68,7 +71,7 @@ namespace WebApplication1
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
