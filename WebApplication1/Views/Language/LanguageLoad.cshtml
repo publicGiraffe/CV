@@ -1,0 +1,104 @@
+﻿@model WebApplication1.Models.LaPerson
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Language"] = Localizer["Language"];
+    ViewData["Dear"] = Localizer["Dear"];
+    ViewData["here you can add"] = Localizer["here you can add"];
+    ViewData["how well are you acquainted with some languages"] = Localizer["how well are you acquainted with some languages"];
+    ViewData["Title of The Language"] = Localizer["Title of The Language"];
+    ViewData["Level of Knowledge"] = Localizer["Level of Knowledge"];
+    ViewData["Chose from options below"] = Localizer["Chose from options below"];
+    ViewData["Beginner"] = Localizer["Beginner"];
+    ViewData["Elementary"] = Localizer["Elementary"];
+    ViewData["Intermediate"] = Localizer["Intermediate"];
+    ViewData["Upper-Intermediate"] = Localizer["Upper-Intermediate"];
+    ViewData["Advanced"] = Localizer["Advanced"];
+    ViewData["Proficiency"] = Localizer["Proficiency"];
+    ViewData["Add"] = Localizer["Add"];
+    ViewData["None"] = Localizer["None"];
+    ViewData["Listed Languages"] = Localizer["Listed Languages"];
+    ViewData["Delete"] = Localizer["Delete"];
+    ViewData["Next"] = Localizer["Next"];
+
+}
+    @{
+        Layout = null;
+    }
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="~/css/mainStyle.css">
+        <title>@ViewData["Language"]</title>
+    </head>
+    <body>
+        <h3>@ViewData["Language"]</h3>
+        <h4>@ViewData["Dear"], @Model.personalInfo.FirstName, @ViewData["here you can add"] <br> @ViewData["how well are you acquainted with some languages"].</h4>
+
+        <div class="half-board">
+            <div>
+                <form asp-action="LanguageLoad" method="post">
+                    <label asp-for="LanguageTitle"> @ViewData["Title of The Language"]:</label><br>
+                    <input type="text" id="LanguageTitle" name="LanguageTitle"><br>
+                    <div><span asp-validation-for="LanguageTitle" class="text-danger"></span></div>
+
+                    <label asp-for="Level"> @ViewData["Level of Knowledge"]:</label><br>
+                    <select asp-for="Level">
+                        <option value=""> @ViewData["Chose from options below"] </option>
+                        <option value="A1">A1 ( @ViewData["Beginner"] )</option>
+                        <option value="A2">A2 ( @ViewData["Elementary"] )</option>
+                        <option value="B2">B2 ( @ViewData["Upper-Intermediate"] )</option>
+                        <option value="B1">B1 ( @ViewData["Intermediate"] )</option>
+                        <option value="C1">C1 ( @ViewData["Advanced"] ) </option>
+                        <option value="C2">C2 ( @ViewData["Proficiency"] )</option>
+                    </select>
+                    <div><span asp-validation-for="Level" class="accept-policy"></span></div>
+
+                    <br>
+                    <input type="submit" value="@ViewData["Add"]" class="button2">
+                </form>
+            </div>
+            <div>
+                @if (Model.languages == null || Model.languages.Count == 0)
+                {
+                    <p> @ViewData["None."]</p>
+                }
+                else
+                {
+                    <h2> @ViewData["Listed Languages"]:</h2>
+                    <table>
+                        <tr>
+                            <th> @ViewData["Title of The Language"].ToString().ToUpper()</th>
+                            <th> @ViewData["Level of Knowledge"].ToString().ToUpper() </th>
+                            <th> @ViewData["Delete"] </th>
+                        </tr>
+
+                        @foreach (var item in @Model.languages)
+                        {
+                            <tr>
+                                <td>@item.LanguageTitle</td>
+                                <td>@item.Level</td>
+                                <td> @Html.ActionLink("Delete", "DeleteLanguageFromList", new { lt = item.LanguageTitle })</td>
+                            </tr>
+                        }
+                    </table>
+                }
+                <button class="button2" onclick="location.href='@Url.Action("Experience", "Experience")'"> @ViewData["Next"] </button>
+
+            </div>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>&copy; 2020 - Natalie </p>
+                </div>
+                <div class="col-sm-6 text-right">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+

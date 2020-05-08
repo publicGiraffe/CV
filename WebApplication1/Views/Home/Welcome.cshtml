@@ -1,0 +1,101 @@
+﻿@model WebApplication1.Models.PersonalInfo
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    ViewData["MyTitle"] = Localizer["Home Page"];
+    ViewData["Title"] = Localizer["Title"];
+    ViewData["To Your New CV"] = Localizer["To Your New CV"];
+    ViewData["but first answer"] = Localizer["but first answer"];
+    ViewData["some"] = Localizer["some"];
+    ViewData["burning questions"] = Localizer["burning questions"];
+    ViewData["First Name"] = Localizer["First Name"];
+    ViewData["Last Name"] = Localizer["Last Name"];
+    ViewData["Birthday"] = Localizer["Birthday"];
+    ViewData["Enter Your Email"] = Localizer["Enter Your Email"];
+    ViewData["Enter A Phone Number"] = Localizer["Enter A Phone Number"];
+    ViewData["Choose your current city"] = Localizer["Choose your current city"];
+    ViewData["Lviv"] = Localizer["Lviv"];
+    ViewData["Kyiv"] = Localizer["Kyiv"];
+    ViewData["Odesa"] = Localizer["Odesa"];
+    ViewData["Kharkiv"] = Localizer["Kharkiv"];
+    ViewData["Ternopil"] = Localizer["Ternopil"];
+    ViewData["Describe yourself"] = Localizer["Describe yourself"];
+    ViewData["Next"] = Localizer["Next"];
+
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/mainStyle.css">
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <h3>@ViewData["MyTitle"]</h3>
+    <h4>
+        @ViewData["To Your New CV"]<br>@ViewData["but first answer"]<br>@ViewData["some"]<br>@ViewData["burning questions"].</h4>
+
+        <div align="center">
+
+            <form asp-action="Welcome" method="post">
+            <label asp-for="FirstName">@ViewData["First Name"]:</label><br>
+            <input type="text" id="FirstName" name="FirstName" value="John"><br>
+            <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+
+            <label asp-for="LastName">
+            @ViewData["Last Name"]:</label><br>
+
+            <input type="text" id="LastName" name="LastName" value="Do6e"><br>
+            <div><span asp-validation-for="LastName" class="accept-policy"></span></div>
+
+            <label asp-for="BirthDay">@ViewData["Birthday"]:</label><br>
+
+            <input type="date" id="Birthday" name="Birthday"><br>
+            <div><span asp-validation-for="BirthDay"></span></div>
+
+
+
+            <label asp-for="Email">@ViewData["Enter Your Email"]:</label><br>
+            <input type="email" id="Email" name="Email"><br>
+            <div><span asp-validation-for="Email"></span></div>
+
+            <label asp-for="Phonenumber">@ViewData["Enter A Phone Number"]:</label><br>
+            <input type="tel" id="Phonenumber" name="Phonenumber" placeholder="(099)9999999" pattern="[0]{1}[6-9]{1}[3-9]{1}[0-9]{2}[0-9]{2}[0-9]{3}" required><br>
+            <div><span asp-validation-for="Phonenumber"></span></div>
+
+            <label asp-for="City">@ViewData["Choose your current city"]:</label><br>
+            <select asp-for="City">
+                <option value="Lviv">@ViewData["Lviv"]</option>
+                <option value="Kyiv">@ViewData["Kyiv"]</option>
+                <option value="Odesa">@ViewData["Odesa"] </option>
+                <option value="Kharkiv">@ViewData["Kharkiv"]</option>
+                <option value="Ternopil">@ViewData["Ternopil"]</option>
+            </select>
+            <div><span asp-validation-for="City"></span></div>
+
+            <label asp-for="Skills">@ViewData["Describe yourself"]:</label><br>
+            <textarea id="Skills" name="Skills">Enter text here...</textarea>
+            <div><span asp-validation-for="Skills"></span></div>
+
+            <br>
+            <input type="submit" value="@ViewData["Next"]" class="button2">
+</form>
+        </div>
+        <footer>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>&copy; 2020 - Natalie </p>
+                </div>
+                <div class="col-sm-6 text-right">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+        </footer>
+</body>
+</html>
+

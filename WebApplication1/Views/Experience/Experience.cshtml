@@ -1,0 +1,47 @@
+﻿
+@model WebApplication1.Models.PersonalInfo
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Experience"] = Localizer["Experience"];
+    ViewData["Well"] = Localizer["Well"];
+    ViewData["it's time"] = Localizer["it's time"];
+    ViewData["to tell us about your previous places of work"] = Localizer["to tell us about your previous places of work"];
+    ViewData["Add more info."] = Localizer["Add more info."];
+    ViewData["Skip Step."] = Localizer["Skip Step."];
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/mainStyle.css">
+    <title>@ViewData["Experience"]</title>
+</head>
+<body>
+    <h3>@ViewData["Experience"]</h3>
+    <h4>@ViewData["Well"], @Model.FirstName, @ViewData["it's time"] <br> @ViewData["to tell us about your previous places of work"].</h4>
+    <div class="half-board">
+        <div>
+            <input class=" button2" type="submit" value="@ViewData["Add more info."]" onclick="location.href='@Url.Action("ExperienceAdd", "Experience")'" />
+        </div>
+        <div>
+            <input class=" button2" type="submit" value="@ViewData["Skip Step."]" onclick="location.href='@Url.Action("Photo", "Photo")'" />
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2020 - Natalie </p>
+            </div>
+            <div class="col-sm-6 text-right">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

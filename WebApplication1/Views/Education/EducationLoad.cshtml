@@ -1,0 +1,115 @@
+﻿@model WebApplication1.Models.EducatedPerson
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Education"] = Localizer["Education"];
+    ViewData["Hi"] = Localizer["Hi"];
+    ViewData["step by step"] = Localizer["step by step"];
+    ViewData["tell us about your certificated knowledge"] = Localizer["tell us about your certificated knowledge"];
+    ViewData["Name of Institute"] = Localizer["Name of Institute"];
+    ViewData["Speciality/Field of study"] = Localizer["Speciality/Field of study"];
+    ViewData["Choose your Degree Program"] = Localizer["Choose your Degree Program"];
+    ViewData["Chose from options below"] = Localizer["Chose from options below"];
+    ViewData["Bachelor's"] = Localizer["Bachelor's"];
+    ViewData["Master's"] = Localizer["Master's"];
+    ViewData["Ph.D/PG"] = Localizer["Ph.D/PG"];
+    ViewData["Year of Passing"] = Localizer["Year of Passing"];
+    ViewData["Add"] = Localizer["Add"];
+    ViewData["Listed Deegres"] = Localizer["Listed Deegres"];
+    ViewData["Delete"] = Localizer["Delete"];
+    ViewData["Next"] = Localizer["Next"];
+    ViewData["DEEGRE PROGRAM"] = Localizer["DEEGRE PROGRAM"];
+
+}
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/mainStyle.css">
+    <title>@ViewData["Education"]</title>
+</head>
+<body>
+    <h3>@ViewData["Education"]</h3>
+    <h4>@ViewData["Hi"], @Model.personalInfo.FirstName, @ViewData["step by step"] <br>@ViewData["tell us about your certificated knowledge"].</h4>
+
+    <div class="half-board">
+        <div>
+            <form asp-action="EducationLoad" method="post">
+                <label asp-for="InstituteName">@ViewData["Name of Institute"]:</label><br>
+                <input type="text" id="InstituteName" name="InstituteName"><br>
+                <div><span asp-validation-for="InstituteName" class="text-danger"></span></div>
+
+                <label asp-for="Speciality">@ViewData["Speciality/Field of study"]:</label><br>
+                <input type="text" id="Speciality" name="Speciality"><br>
+                <div><span asp-validation-for="Speciality" class="accept-policy"></span></div>
+
+
+                <label asp-for="Degree">@ViewData["Choose your Degree Program"]:</label><br>
+                <select asp-for="Degree">
+                    <option value="">@ViewData["Chose from options below"]</option>
+                    <option value="Bachelor's Degree">@ViewData["Bachelor's"]</option>
+                    <option value="Master's Degree">@ViewData["Master's"]</option>
+                    <option value="Ph.D/PG Degree">@ViewData["Ph.D/PG"]</option>
+                </select>
+                <div><span asp-validation-for="Degree"></span></div>
+
+                <label asp-for="YearPassed">@ViewData["Year of Passing"]:</label><br>
+                <input type="number" id="YearPassed" name="YearPassed"><br>
+                <div><span asp-validation-for="YearPassed"></span></div>
+
+
+                <br>
+                <input type="submit" value="@ViewData["Add"]" class="button2">
+            </form>
+        </div>
+        <div>
+            @if (Model.education == null || Model.education.Count == 0)
+            {
+                <p>None.</p>
+            }
+            else
+            {
+        <h2>@ViewData["Listed Deegres"]:</h2>
+                <table>
+                    <tr>
+                        <th>@ViewData["Name of Institute"]</th>
+                        <th>@ViewData["DEEGRE PROGRAM"]</th>
+                        <th>@ViewData["Speciality/Field of study"]</th>
+                        <th>@ViewData["Year of Passing"]</th>
+                        <th>@ViewData["Delete"]</th>
+                    </tr>
+
+                    @foreach (var item in @Model.education)
+                    {
+                        <tr>
+                            <td>@item.InstituteName</td>
+                            <td>@item.Degree</td>
+                            <td>@item.Speciality</td>
+                            <td>@item.YearPassed</td>
+                            <td> @Html.ActionLink("Delete", "DeleteFromList", new { speciality = item.Speciality })</td>
+                        </tr>
+                    }
+                </table>
+            }
+        <button class="button2" onclick="location.href='@Url.Action("Language", "Language")'">@ViewData["Next"]</button>
+
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2020 - Natalie </p>
+            </div>
+            <div class="col-sm-6 text-right">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

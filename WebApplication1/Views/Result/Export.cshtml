@@ -1,0 +1,57 @@
+﻿
+@model WebApplication1.Models.Person
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    
+    ViewData["Thank You"] = Localizer["Thank You"];
+    ViewData["Congratulations"] = Localizer["Congratulations"];
+    ViewData["Here You"] = Localizer["Here You"];
+    ViewData["Have"] = Localizer["Have"];
+    ViewData["Your Brand New"] = Localizer["Your Brand New"];
+    ViewData["Create Document"] = Localizer["Create Document"];
+
+
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/mainStyle.css">
+    <title>@ViewData["Thank You"]</title>
+</head>
+<body>
+    <h3>@ViewData["Congratulations"]</h3>
+    <h4>@ViewData["Here You"] <br>@ViewData["Have"] <br />@ViewData["Your Brand New"] </h4>
+    <h3>CV</h3>
+    <hr />
+
+    <br />
+    <br />
+    <div class="half-board">
+
+        @{Html.BeginForm("CreateDocument", "Result", FormMethod.Get);
+            {
+                <div>
+                    <input type="submit" value="@ViewData["Create Document"]" class="button2" />
+                </div>
+            }
+            Html.EndForm();
+        }
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2020 - Natalie </p>
+            </div>
+            <div class="col-sm-6 text-right">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+﻿@model WebApplication1.Models.ExpPerson
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Experience"] = Localizer["Experience"];
+    ViewData["Well"] = Localizer["Well"];
+    ViewData["it's time"] = Localizer["it's time"];
+    ViewData["to tell us about your previous places of work"] = Localizer["to tell us about your previous places of work"];
+    ViewData["Name of the Company"] = Localizer["Name of the Company"];
+    ViewData["Job Position"] = Localizer["Job Position"];
+    ViewData["For How Long"] = Localizer["For How Long"];
+    ViewData["Chose from options below"] = Localizer["Chose from options below"];
+    ViewData["Add"] = Localizer["Add"];
+    ViewData["None"] = Localizer["None"];
+    ViewData["Delete"] = Localizer["Delete"];
+    ViewData["Next"] = Localizer["Next"];
+
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/mainStyle.css">
+    <title>@ViewData["Experience"]</title>
+</head>
+<body>
+    <h3>@ViewData["Experience"]</h3>
+    <h4>@ViewData["Well"], @Model.personalInfo.FirstName, @ViewData["it's time"] <br> @ViewData["to tell us about your previous places of work"].</h4>
+
+    <div class="half-board">
+        <div>
+            <form asp-action="ExperienceLoad" method="post">
+                <label asp-for="Company">@ViewData["Name of the Company"]:</label><br>
+                <input type="text" id="Company" name="Company"><br>
+                <div><span asp-validation-for="Company" class="text-danger"></span></div>
+
+                <label asp-for="Job">@ViewData["Job Position"]:</label><br>
+                <input type="text" id="Job" name="Job"><br>
+                <div><span asp-validation-for="Job" class="accept-policy"></span></div>
+
+                <label asp-for="DurationNumber">@ViewData["For How Long"]:</label><br>
+                <input type="number" id="DurationNumber" name="DurationNumber"><br>
+                <div><span asp-validation-for="DurationNumber"></span></div>
+
+
+                <select asp-for="DurationType">
+                    <option value="">@ViewData["Chose from options below"]</option>
+                    <option value="day/s">day/s</option>
+                    <option value="week/s">week/s</option>
+                    <option value="month/s">month/s</option>
+                    <option value="year/s">year/s</option>
+                </select>
+                <div><span asp-validation-for="DurationType"></span></div>
+
+
+
+                <br>
+                <input type="submit" value="@ViewData["Add"]" class="button2">
+            </form>
+        </div>
+        <div>
+            @if (Model.experiences == null || Model.experiences.Count == 0)
+            {
+                <p>None.</p>
+            }
+            else
+            {
+        <h2>@ViewData["Experience"]:</h2>
+                <table>
+                    <tr>
+                        <th>@ViewData["Name of the Company"]</th>
+                        <th>@ViewData["Job Position"]</th>
+                        <th>@ViewData["For How Long"]</th>
+                        <th> </th>
+                        <th>@ViewData["Delete"]</th>
+                    </tr>
+
+                    @foreach (var item in @Model.experiences)
+                    {
+                        <tr>
+                            <td>@item.Company</td>
+                            <td>@item.Job</td>
+                            <td>@item.DurationNumber.ToString()</td>
+                            <td>@item.DurationType</td>
+                            <td> @Html.ActionLink("Delete", "DeleteFromList", new { company = item.Company })</td>
+                        </tr>
+                    }
+                </table>
+            }
+        <button class="button2" onclick="location.href='@Url.Action("Photo", "Photo")'">@ViewData["Next"]</button>
+
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2020 - Natalie </p>
+            </div>
+            <div class="col-sm-6 text-right">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

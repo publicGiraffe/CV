@@ -1,0 +1,168 @@
+﻿@import 'https://fonts.googleapis.com/css?family=Baloo+Thambi+2';
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Baloo Thambi 2', cursive;
+    line-height: 1.75em;
+    font-size: 16px;
+    background-color: #222;
+    color: whitesmoke;
+}
+
+p {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 30px;
+    line-height: 34px;
+}
+
+h2 {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 95px;
+    font-weight: bold;
+    line-height: 27px;
+    padding-top: 25px;
+    text-align: center;
+}
+
+h4 {
+    font-family: 'Raleway', sans-serif;
+    padding-bottom: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+hr {
+    height: 1px;
+    background-color: #d8d8d8;
+    border: none;
+    width: 100%;
+    margin: 0px;
+}
+
+a[href] {
+    color: #1e8ad6;
+}
+
+    a[href]:hover {
+        color: #3ba0e6;
+    }
+
+img {
+    max-width: 100%;
+}
+
+li {
+    line-height: 1.5em;
+}
+
+aside,
+[class *= "sidebar"],
+[id *= "sidebar"] {
+    max-width: 90%;
+    margin: 0 auto;
+    border: 1px solid lightgrey;
+    padding: 5px 15px;
+}
+
+label {
+    font-size: 25px;
+}
+
+input, option {
+    font-family: 'Raleway', sans-serif;
+    color: #d1d1d1;
+    background: transparent;
+    text-align: center;
+    font-size: 18px;
+    align-content: center;
+    margin-bottom: 10px;
+}
+
+    input:hover {
+        color: white;
+        border-color: white;
+    }
+
+    input:active {
+        color: #ababab;
+        border-color: #ababab;
+    }
+
+.button2 {
+    display: inline-block;
+    padding: 0.5em 3em;
+    border: 0.16em solid #d1d1d1;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    color: #d1d1d1;
+    background: transparent;
+    text-align: center;
+    font-size: 25px;
+    transition: all 0.15s;
+    align-content: center;
+}
+
+    .button2:hover {
+        color: white;
+        border-color: white;
+    }
+
+    .button2:active {
+        color: #ababab;
+        border-color: #ababab;
+    }
+
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+.half-board {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+@media all and (max-width:30em) {
+      .button2 {
+        display: block;
+        margin: 0.4em auto;
+    }
+}
+
+@media (min-width: 1921px) {
+    body {
+        font-size: 18px;
+    }
+}

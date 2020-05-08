@@ -1,0 +1,62 @@
+﻿
+@model WebApplication1.Models.Photo
+@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+@{
+    
+    ViewData["Picture"] = Localizer["Picture"];
+    ViewData["So this is last step"] = Localizer["So this is last step"];
+    ViewData["that is also optional"] = Localizer["that is also optional"];
+    ViewData["Image"] = Localizer["Image"];
+    ViewData["Add"] = Localizer["Add"];
+    ViewData["Skip Step."] = Localizer["Skip Step."];
+    
+
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/css/mainStyle.css">
+    <title>@ViewData["Picture"]</title>
+</head>
+<body>
+    <h3>@ViewData["Picture"]</h3>
+    <h4>@ViewData["So this is last step"]  <br> @ViewData["that is also optional"].</h4>
+    <div class="half-board">
+        <div>
+            @using (Html.BeginForm("Add", "Photo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+            <h4>@ViewData["Image"]</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+
+                @Html.LabelFor(model => model.ImagePath)
+                <input type="file" name="ImageFile" required>
+                <input type="submit" value="@ViewData["Add"]" class="button2" />
+            }
+        </div>
+        <div>
+            <button class="button2" onclick="location.href='@Url.Action("Export", "Result")'">@ViewData["Skip Step."]</button>
+
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <p>&copy; 2020 - Natalie </p>
+            </div>
+            <div class="col-sm-6 text-right">
+                @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
